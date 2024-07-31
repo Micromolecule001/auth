@@ -1,0 +1,41 @@
+.field--select {
+    .field__select {
+        /* Input */
+
+        /* Auto layout */
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+        gap: 12px;
+
+        width: 100%;
+        height: 48px;
+
+        /* Фон Input элеметов */
+        background: #F7F7F7;
+        border-radius: 10px;
+
+        /* Inside auto layout */
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+
+    }
+
+    ul {
+        display:block;
+
+        &[active] {
+            display: none;
+        }
+        
+        li {
+            background-color: #F7F7F7;
+            padding: 5px;
+        }
+    }
+
+
+}

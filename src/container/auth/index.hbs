@@ -1,0 +1,37 @@
+<div class="page">
+    <header>
+        {{> back-button}}
+    </header>
+
+    <form action="#">
+        <h1 class="page__title"> Registration </h1>
+
+        <div class="form">
+            <div class="form__item">
+                {{> field action="signupForm.change" label="Email" type="email" name="email" placeholder="example@mail.com"}}
+            </div>
+
+            <div class="form__item">
+                {{> field-password action="signupForm.change" label="Password" type="password" name="password" placeholder="Enter your password"}}
+            </div>
+
+            <div class="form__item">
+                {{> field-password action="signupForm.change" label="Repeat password" type="password" name="password" placeholder="Enter your password"}}
+            </div>
+
+            <div class="form__item">
+                {{> field-select action="signupForm.change" label="Role" name="role" placeholder="Choose a role" list=data.role}}
+            </div>
+
+            <div class="form__item">
+                {{> field-checkbox action="signupForm.change" label="You have accept service rules" name="isConfirm"}}
+            </div>
+
+
+        </div>
+
+        <button onclick="signupForm.submit()" class="button" type="button"> Register </button>
+
+        <span class="alert alert--error"> Attention, error ! </span>
+    </form>
+</div>

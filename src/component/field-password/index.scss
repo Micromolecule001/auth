@@ -1,0 +1,50 @@
+.field {
+    &__label {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 14px;
+        text-align: left;
+        margin: 8px 0px;
+    }
+
+    &__input {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 16px;
+        gap: 16px;
+
+       width: 100%;
+        height: 46px;
+
+        background: #F7F7F7;
+        border-radius: 10px;
+
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+    }
+
+    &__wrapper {
+        position: relative;
+    }
+
+    &__icon {
+        border: 2px solid red;
+        width: 24px;
+        height: 24px;
+        display: inline-block;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-image: url('../../svg/eye-off.svg');
+        
+        &[show] {
+            border: 2px solid green;
+            background-image: url('../../svg/eye-on.svg');
+        }
+
+        top:calc(50% - 10px);
+        right: 16px;
+        position: absolute;
+    }
+}

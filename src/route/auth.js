@@ -3,8 +3,7 @@ const express = require('express')
 // Cтворюємо роутер - місце, куди ми підключаємо ендпоїнти
 const router = express.Router()
 
-const Test = require('../class/test')
-
+const { User } = require('../class/user')
 // ================================================================
 
 // router.get Створює нам один ентпоїнт
@@ -14,19 +13,25 @@ router.get('/', function (req, res) {
   // res.render генерує нам HTML сторінку
 
   // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('index', {
-    // вказуємо назву контейнера
-    name: 'index',
-    // вказуємо назву компонентів
-    component: ['heading'],
-
-    // вказуємо назву сторінки
-    title: 'Назва сторінки',
-    // ... сюди можна далі продовжувати додавати потрібні технічні дані, які будуть використовуватися в layout
-
-    // вказуємо дані,
+  res.render('auth', {
+    name: 'auth',
+    component: ['back-button', 'field', 'field-password', 'field-checkbox', 'field-select'],
+    title: 'Auth',
     data: {
-      test: new Test().test,
+      role: [
+        {
+          value: User.USER_ROLE.USER,
+          text: 'User',
+        },
+        {
+          value: User.USER_ROLE.ADMIN,
+          text: 'Admin',
+        },
+        {
+          value: User.USER_ROLE.DEVELOPER,
+          text: 'Developer',
+        }
+      ],
     },
   })
   // ↑↑ сюди вводимо JSON дані

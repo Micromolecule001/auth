@@ -1,0 +1,32 @@
+.field {
+    &__label {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 14px;
+        text-align: left;
+        margin: 8px 0px;
+    }
+
+    &__input {
+        /* Search */
+
+        /* Auto layout */
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        padding: 16px;
+        gap: 16px;
+
+       width: 100%;
+        height: 46px;
+
+        background: #F7F7F7;
+        border-radius: 10px;
+
+        /* Inside auto layout */
+        flex: none;
+        order: 1;
+        flex-grow: 0;
+
+    }
+}
