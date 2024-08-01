@@ -10,7 +10,7 @@ class SignupForm extends Form {
     }
     FIELD_ERROR = {
         IS_EMPTY: 'Empty field',
-        IS_BIG: 'Too much...',
+        IS_BIG: 'Too much characters',
         EMAIL: 'Its not an email',
         PASSWORD: 'Need more than 8 characters',
         PASSWORD_AGAIN: 'Different passwords',
@@ -96,10 +96,8 @@ class SignupForm extends Form {
             [this.FIELD_NAME.EMAIL]: this.value[this.FIELD_NAME.EMAIL],
             [this.FIELD_NAME.PASSWORD]: this.value[this.FIELD_NAME.PASSWORD],
             [this.FIELD_NAME.ROLE]: this.value[this.FIELD_NAME.ROLE],
-            
         })
     }
 }
 
 window.signupForm = new SignupForm()
-
