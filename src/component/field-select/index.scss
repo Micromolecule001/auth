@@ -1,8 +1,5 @@
 .field--select {
     .field__select {
-        /* Input */
-
-        /* Auto layout */
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -13,22 +10,23 @@
         width: 100%;
         height: 48px;
 
-        /* Фон Input элеметов */
+        // Фон Input элементов
         background: #F7F7F7;
         border-radius: 10px;
 
-        /* Inside auto layout */
+        // Inside auto layout
         flex: none;
         order: 0;
         flex-grow: 0;
 
+        
     }
 
     ul {
-        display:block;
+        display: none; // Hidden by default
 
         &[active] {
-            display: none;
+            display: block; // Shown when active
         }
         
         li {
@@ -36,6 +34,4 @@
             padding: 5px;
         }
     }
-
-
 }

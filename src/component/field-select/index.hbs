@@ -2,12 +2,12 @@
     <label for="{{name}}" class="field__label"> {{label}} </label>
     
     <div class="field__container">
-        <button onclick="fieldSelect.toggle(this)" class="field__select" type="button">
-            <span class="field__value field__value--placeholder" >{{placeholder}}</span>
+        <button onclick="fieldSelect.toggle(this)" class="field__select validation" type="button">
+            <span class="field__value field__value--placeholder">{{placeholder}}</span>
             <span class="field__icon--select">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <line x1="3.41421" y1="5" x2="7.65685" y2="9.24264" stroke="#363636" stroke-width="2" stroke-linecap="round"/>
-                <path d="M8 9.58575L12.5951 4.99066" stroke="#363636" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="3.41421" y1="5" x2="7.65685" y2="9.24264" stroke="#363636" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M8 9.58575L12.5951 4.99066" stroke="#363636" stroke-width="2" stroke-linecap="round"/>
                 </svg>
             </span>
         </button>
@@ -15,10 +15,7 @@
         <ul class="field__option-list">
             {{#each list}}
                 <li 
-                onclick=" 
-                fieldSelect.change(this)
-    
-                {{../action}}('{{../name}}', {{value}})" 
+                onclick="fieldSelect.change(this); {{../action}}('{{../name}}', {{value}})" 
                 id="{{text}}" class="field__option">
                     {{text}}
                 </li>

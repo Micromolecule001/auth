@@ -1,18 +1,17 @@
-// Підключаємо технологію express для back-end сервера
 const express = require('express')
-// Cтворюємо роутер - місце, куди ми підключаємо ендпоїнти
 const router = express.Router()
 
 const { User } = require('../class/user')
+
+User.create({
+  email: 'example@gmail.com',
+  password: 'qwerty12345',
+  role: 1,
+})
+
 // ================================================================
 
-// router.get Створює нам один ентпоїнт
-
-// ↙️ тут вводимо шлях (PATH) до сторінки
 router.get('/', function (req, res) {
-  // res.render генерує нам HTML сторінку
-
-  // ↙️ cюди вводимо назву файлу з сontainer
   res.render('auth', {
     name: 'auth',
     component: ['back-button', 'field', 'field-password', 'field-checkbox', 'field-select'],
@@ -34,7 +33,32 @@ router.get('/', function (req, res) {
       ],
     },
   })
-  // ↑↑ сюди вводимо JSON дані
+})
+
+router.post('/', function (req, res) {
+  const { email, password, role } = req.body 
+
+  console.log(req.body)
+
+  if (!email || !password || !role) {
+    return res.status(400).json({
+      message: "Error"
+    })
+  }
+
+  try {
+    User.create({email,password,role})
+
+    return res.status(200).json({
+      message: "Success",
+    })
+  } catch (err) {
+    return res.status(400).json({
+      message: err.message,
+    })
+  }
+
+  
 })
 
 // Підключаємо роутер до бек-енду

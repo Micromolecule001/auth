@@ -26,6 +26,15 @@
         flex-direction: column;
         gap: 30px;
         
+        .field__error {
+            display: none;
+            color: red;
+            font-size: 12px;
+            &--active {
+                display: block;
+            }
+        }
+
         .button {
             display: flex;
             flex-direction: row;
@@ -52,6 +61,12 @@
             line-height: 14px;
             text-align: center;
 
+            &--disabled {
+                opacity: 0.5;
+                &:hover {
+                    cursor: default;
+                }
+            }
         }
 
         .alert {
@@ -84,7 +99,12 @@
             line-height: 14px;
             text-align: left;
 
+            &--disabled {
+                display: none;
+            }
         }
+
+        
 
     }
 

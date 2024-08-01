@@ -9,29 +9,34 @@
         <div class="form">
             <div class="form__item">
                 {{> field action="signupForm.change" label="Email" type="email" name="email" placeholder="example@mail.com"}}
+                <span name="email" class="field__error"> Error </span>
             </div>
 
             <div class="form__item">
                 {{> field-password action="signupForm.change" label="Password" type="password" name="password" placeholder="Enter your password"}}
+                <span name="password" class="field__error"> Error </span>
             </div>
 
             <div class="form__item">
-                {{> field-password action="signupForm.change" label="Repeat password" type="password" name="password" placeholder="Enter your password"}}
+                {{> field-password action="signupForm.change" label="Repeat password" type="password" name="passwordAgain" placeholder="Enter your password"}}
+                <span name="passwordAgain" class="field__error "> Error </span>
             </div>
 
             <div class="form__item">
                 {{> field-select action="signupForm.change" label="Role" name="role" placeholder="Choose a role" list=data.role}}
+                <span name="role" class="field__error"> Error </span>
             </div>
 
             <div class="form__item">
                 {{> field-checkbox action="signupForm.change" label="You have accept service rules" name="isConfirm"}}
+                <span name="isConfirm" class="field__error"> Error </span>
             </div>
 
 
         </div>
 
-        <button onclick="signupForm.submit()" class="button" type="button"> Register </button>
+        <button onclick="signupForm.submit()" class="button button--disabled" type="button"> Register </button>
 
-        <span class="alert alert--error"> Attention, error ! </span>
+        <span class="alert alert--error alert--disabled"> Attention, error ! </span>
     </form>
 </div>
