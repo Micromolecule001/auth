@@ -33,9 +33,6 @@ export class Form {
         const span = document.querySelector(`.field__error[name="${name}"]`) // Find the span element for the error message
         const field = document.querySelector(`.validation[name="${name}"]`) // Find the field element to apply validation styles
 
-        console.log(name, error)
-        console.log(field, span)
-
         if (span) {
             span.classList.toggle(
                 'field__error--active',

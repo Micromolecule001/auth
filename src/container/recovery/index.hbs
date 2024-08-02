@@ -1,0 +1,22 @@
+<div class="page">
+    <header>
+        {{> back-button}}
+    </header>
+
+    <div class="wrapper">
+        <form action="#">
+            <h1 class="page__title"> Password recovery </h1>
+
+            <div class="form">
+                <div class="form__item">
+                    {{> field action="recoveryForm.change" label="Email" type="email" name="email" placeholder="example@mail.com"}}
+                    <span name="email" class="field__error"> Error </span>
+                </div>
+            </div>
+
+            <button onclick="recoveryForm.submit()" class="button button--disabled" type="button"> Register </button>
+
+            <span class="alert alert--error alert--disabled"> Attention, error ! </span>
+        </form>
+    </div>
+</div>
