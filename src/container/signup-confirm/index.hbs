@@ -1,0 +1,26 @@
+<div class="page">
+    <header>
+        {{> back-button}}
+    </header>
+
+    <div class="wrapper">
+        <form action="#">
+            <h1 class="page__title"> Email confirm </h1>
+
+            <p class="page__subtitle">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nemo esse hic
+            </p>
+
+            <div class="form">
+                <div class="form__item">
+                    {{> field action="signupConfirmForm.change" label="Code" type="text" name="code" placeholder="Your code"}}
+                    <span name="email" class="field__error"> Error </span>
+                </div>
+            </div>
+
+            <button onclick="signupConfirmForm.submit()" class="button button--disabled" type="button"> Confirm </button>
+
+            <span class="alert alert--error alert--disabled"> Attention, error ! </span>
+        </form>
+    </div>
+</div>

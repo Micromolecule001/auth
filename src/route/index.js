@@ -2,6 +2,15 @@
 const express = require('express')
 const router = express.Router()
 
+router.get('/home', function (req, res) {
+    res.render('home', {
+        name: 'Home',
+        title: 'Home page',
+        component: [],
+        data: {},
+    })
+})
+
 // Підключіть файли роутів
 const auth = require('./auth')
 // Підключіть інші файли роутів, якщо є

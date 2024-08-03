@@ -1,15 +1,19 @@
 import { Form, REG_EXP_EMAIL, REG_EXP_PASSWORD } from '../../script/form'
+
 import { saveSession } from '../../script/session'
 
-class RecoveryConfirmForm extends Form {
+class SignupForm extends Form {
     FIELD_NAME = {
-        CODE: 'code',
+        EMAIL: 'email',
         PASSWORD: 'password',
         PASSWORD_AGAIN: 'passwordAgain',
+        ROLE: 'role',
+        IS_CONFIRM: 'isConfirm',
     }
     FIELD_ERROR = {
         IS_EMPTY: 'Empty field',
         IS_BIG: 'Too much characters',
+        EMAIL: 'Its not an email',
         PASSWORD: 'Need more than 8 characters',
         PASSWORD_AGAIN: 'Different passwords',
         NOT_CONFIRM: 'Confirm the rules',
@@ -24,6 +28,12 @@ class RecoveryConfirmForm extends Form {
 
         if (String(value).length > 20) {
             return this.FIELD_ERROR.IS_BIG
+        }
+
+        if (name === this.FIELD_NAME.EMAIL) {
+            if (!REG_EXP_EMAIL.test(String(value))) {
+                return this.FIELD_ERROR.EMAIL
+            }
         }
 
         if (name === this.FIELD_NAME.PASSWORD) {
@@ -41,42 +51,49 @@ class RecoveryConfirmForm extends Form {
 
     submit = async () => {
         if (this.disabled) {
-            this.validateAll()
+            this.validateAll();
         } else {
-            console.log(this.value)
-
-            this.setAlert('progress', 'Loading...')
-
+            console.log(this.value);
+    
+            this.setAlert('progress', 'Loading...');
+    
             try {
-                const res = await fetch('/recovery-confirm', {
+                const res = await fetch('/login', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: this.convertData(),
-                })
-
-                const data = await res.json()
-
+                });
+    
+                const data = await res.json();
+    
                 if (res.ok) {
-                    this.setAlert('success', data.message)
+                    this.setAlert('success', data.message);
                     saveSession(data.session)
-                    validation('/')
+                    location.assign('/signup-confirm')
                 } else {
-                    this.setAlert('error', data.message)
+                    this.setAlert('error', data.message);
                 }
             } catch (err) {
-                this.setAlert('error', error.message)
+                this.setAlert('error', err.message);
             }
         }       
     }
 
     convertData = () => {
         return JSON.stringify({
-            [this.FIELD_NAME.CODE]: Number(this.value[this.FIELD_NAME.CODE]),
+            [this.FIELD_NAME.EMAIL]: this.value[this.FIELD_NAME.EMAIL],
             [this.FIELD_NAME.PASSWORD]: this.value[this.FIELD_NAME.PASSWORD],
+            [this.FIELD_NAME.ROLE]: this.value[this.FIELD_NAME.ROLE],
         })
     }
 }
 
-window.recoveryConfirmForm = new RecoveryConfirmForm()
+window.signupForm = new SignupForm()
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.session) {
+        location.assign('/home')
+    }
+})

@@ -21,7 +21,7 @@
                 {{> field-password action="signupForm.change" label="Repeat password" type="password" name="passwordAgain" placeholder="Enter your password"}}
                 <span name="passwordAgain" class="field__error "> Error </span>
             </div>
-
+            
             <div class="form__item">
                 {{> field-select action="signupForm.change" label="Role" name="role" placeholder="Choose a role" list=data.role}}
                 <span name="role" class="field__error"> Error </span>
@@ -38,5 +38,7 @@
         <button onclick="signupForm.submit()" class="button button--disabled" type="button"> Register </button>
 
         <span class="alert alert--error alert--disabled"> Attention, error ! </span>
+
+        <span class="link__prefix"> <a href="/login" class="link"> Login </a></span>
     </form>
 </div>

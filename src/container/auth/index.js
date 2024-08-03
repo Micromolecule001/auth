@@ -1,5 +1,7 @@
 import { Form, REG_EXP_EMAIL, REG_EXP_PASSWORD } from '../../script/form'
 
+import { saveSession } from '../../script/session'
+
 class SignupForm extends Form {
     FIELD_NAME = {
         EMAIL: 'email',
@@ -57,36 +59,36 @@ class SignupForm extends Form {
                 return this.FIELD_ERROR.NOT_CONFIRM
             }
         }
-
-
     }
 
     submit = async () => {
         if (this.disabled) {
-            this.validateAll()
+            this.validateAll();
         } else {
-            console.log(this.value)
-
-            this.setAlert('progress', 'Loading...')
-
+            console.log(this.value);
+    
+            this.setAlert('progress', 'Loading...');
+    
             try {
-                const res = await fetch('/', {
+                const res = await fetch('/signup', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: this.convertData(),
-                })
-
-                const data = await res.json()
-
+                });
+    
+                const data = await res.json();
+    
                 if (res.ok) {
-                    this.setAlert('success', data.message)
+                    this.setAlert('success', data.message);
+                    saveSession(data.session)
+                    location.assign('/signup-confirm')
                 } else {
-                    this.setAlert('error', error.message)
+                    this.setAlert('error', data.message);
                 }
             } catch (err) {
-                this.setAlert('error', error.message)
+                this.setAlert('error', err.message);
             }
         }       
     }
