@@ -11,6 +11,18 @@ User.create({
   role: 1,
 });
 
+User.create({
+  email: 'asasd@asd.asd',
+  password: 'qwerty12345',
+  role: 2,
+});
+
+User.create({
+  email: 'asdddd@asd.asd',
+  password: 'qwerty12345',
+  role: 3,
+});
+
 // ================================================================
 
 router.get('/signup', function (req, res) {

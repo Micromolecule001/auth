@@ -40,10 +40,19 @@ class User {
     return user
   }
 
+  static getList = () => this.#list
+
   // getting user by email 
   static getByEmail(email) {
     return (
       this.#list.find((user) => user.email === String(email).toLowerCase()) || // looking for a user by email
+      null 
+    )
+  }
+  
+  static getById(id) {
+    return (
+      this.#list.find((user) => user.id === Number(id)) || // looking for a user by email
       null 
     )
   }
