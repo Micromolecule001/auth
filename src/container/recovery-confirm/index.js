@@ -1,4 +1,4 @@
-import { Form, REG_EXP_EMAIL, REG_EXP_PASSWORD } from '../../script/form'
+import { Form, REG_EXP_PASSWORD } from '../../script/form'
 import { saveSession } from '../../script/session'
 
 class RecoveryConfirmForm extends Form {
@@ -61,7 +61,7 @@ class RecoveryConfirmForm extends Form {
                 if (res.ok) {
                     this.setAlert('success', data.message)
                     saveSession(data.session)
-                    validation('/')
+                    location.assign('/')
                 } else {
                     this.setAlert('error', data.message)
                 }

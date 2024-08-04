@@ -60,6 +60,7 @@ router.post('/signup', function (req, res) {
     const newUser = User.create({ email, password, role });
 
     const session = Session.create(newUser);
+    
     Confirm.create(newUser.email);
 
     return res.status(200).json({
@@ -214,7 +215,7 @@ router.post('/signup-confirm', function (req, res) { // Changed from /recovery-c
       });
     }
 
-    session.data.isConfirm = true;
+    session.user.isConfirm = true;
 
     return res.status(200).json({
       message: 'Email has been confirmed',

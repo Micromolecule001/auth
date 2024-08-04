@@ -1,13 +1,17 @@
 export const SESSION_KEY = 'sessionAuth'
 
 export const saveSession = (session) => {
-    console.log(session)
+    console.log('Saved session: ', session)
 
-    window.session = session
-
-    localStorage.setItem(SESSION_KEY, JSON.stringify(session))
+    try {
+        window.session = session
+        localStorage.setItem(SESSION_KEY, JSON.stringify(session))
+    } catch (error) {
+        console.log(error)
+        window.session = null
+    }
 }
-
+ 
 export const loadSession = () => {
     try {
         const session = JSON.parse(localStorage.getItem(SESSION_KEY))

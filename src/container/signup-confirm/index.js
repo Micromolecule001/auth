@@ -1,5 +1,5 @@
-import { Form, REG_EXP_EMAIL, REG_EXP_PASSWORD } from '../../script/form';
-import { getTokenSession } from '../../script/session';
+import { Form } from '../../script/form';
+import { getTokenSession, saveSession } from '../../script/session';
 
 class SignupConfirmForm extends Form {
     FIELD_NAME = {
@@ -8,6 +8,16 @@ class SignupConfirmForm extends Form {
     FIELD_ERROR = {
         IS_EMPTY: 'Empty field',
         IS_BIG: 'Too much characters',
+    }
+
+    validate = (name, value) => {
+        if (String(value).length < 1) {
+            return this.FIELD_ERROR.IS_EMPTY 
+        }
+
+        if (String(value).length > 20) {
+            return this.FIELD_ERROR.IS_BIG
+        }
     }
 
     submit = async () => {
@@ -31,7 +41,8 @@ class SignupConfirmForm extends Form {
 
                 if (res.ok) {
                     this.setAlert('success', data.message);
-                    location.assign('/home');
+                    saveSession(data.session)
+                    location.assign('/');
                 } else {
                     this.setAlert('error', data.message);
                 }
@@ -51,9 +62,8 @@ class SignupConfirmForm extends Form {
 
 window.signupConfirmForm = new SignupConfirmForm();
 
-
 document.addEventListener('DOMContentLoaded', () => {
-    if (window.session && window.user.isConfirm) {
+    if (window.session && window.session.user.isConfirm) {
         location.assign('/home')
     }
 })

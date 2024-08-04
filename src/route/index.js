@@ -2,6 +2,15 @@
 const express = require('express')
 const router = express.Router()
 
+router.get('/', function (req, res) {
+    res.render('index', {
+        name: 'index',
+        title: 'index page',
+        component: [],
+        data: {},
+    })
+})
+
 router.get('/home', function (req, res) {
     res.render('home', {
         name: 'Home',
