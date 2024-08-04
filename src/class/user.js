@@ -5,10 +5,11 @@ class User {
     DEVELOPER: 3,
   }
 
-  static #list = []
+  static #list = []   // list 
 
   static #count = 1
 
+  // building users 
   constructor({email, password, role}) {
     this.id = User.#count++
     this.email = String(email).toLowerCase()
@@ -17,6 +18,7 @@ class User {
     this.isConfirm = false
   }
 
+  // Number(role) or default user role
   static #convertRole = (role) => {
     role == Number(role) // convert role to number()
 
@@ -31,12 +33,14 @@ class User {
     return role
   }
 
+  // create the user by { email, password, role }
   static create(data) {
     const user = new User(data) // create one USER by constructor 
     this.#list.push(user) // add to "db"
     return user
   }
 
+  // getting user by email 
   static getByEmail(email) {
     return (
       this.#list.find((user) => user.email === String(email).toLowerCase()) || // looking for a user by email

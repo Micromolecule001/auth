@@ -21,13 +21,12 @@ class SignupConfirmForm extends Form {
     }
 
     submit = async () => {
+        console.log(-3)
         if (this.disabled) {
             this.validateAll();
         } else {
-            console.log(this.value);
-
+            console.log('value: ', this.value);
             this.setAlert('progress', 'Loading...');
-
             try {
                 const res = await fetch('/signup-confirm', { // Ensure correct endpoint
                     method: 'POST',
@@ -38,7 +37,8 @@ class SignupConfirmForm extends Form {
                 });
 
                 const data = await res.json();
-
+                console.log('res data; ', data)
+                console.log(5)
                 if (res.ok) {
                     this.setAlert('success', data.message);
                     saveSession(data.session)
@@ -53,6 +53,8 @@ class SignupConfirmForm extends Form {
     }
 
     convertData = () => {
+
+        console.log('Getting token: ', getTokenSession())
         return JSON.stringify({
             [this.FIELD_NAME.CODE]: Number(this.value[this.FIELD_NAME.CODE]),
             token: getTokenSession()

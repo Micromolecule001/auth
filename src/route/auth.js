@@ -59,7 +59,7 @@ router.post('/signup', function (req, res) {
 
     const newUser = User.create({ email, password, role });
 
-    const session = Session.create(newUser);
+    // const session = Session.create(newUser);
     
     Confirm.create(newUser.email);
 
@@ -183,46 +183,51 @@ router.get('/signup-confirm', function (req, res) {
   });
 });
 
-router.post('/signup-confirm', function (req, res) { // Changed from /recovery-confirm to /signup-confirm
+router.post('/signup-confirm', function (req, res) {
   const { code, token } = req.body;
+  console.log('Received data:', { code, token }); // Log the received data
 
   if (!code || !token) {
-    return res.status(400).json({
-      message: 'error, fields weren’t filled'
-    });
+      console.error('Missing fields:', { code, token });
+      return res.status(400).json({
+          message: 'Error, fields weren’t filled'
+      });
   }
 
   try {
-    const session = Session.get(token);
+      const session = Session.get(token);
+      if (!session) {
+          console.error('Session not found for token:', token);
+          return res.status(400).json({
+              message: 'Error, login in account'
+          });
+      }
 
-    if (!session) {
-      return res.status(400).json({
-        message: 'Error, login in account'
+      const email = Confirm.getData(Number(code)); // Ensure the code is converted to number
+      console.log('Retrieved email:', email); // Log the retrieved email
+
+      if (!email) {
+          console.error('Email not found for code:', code);
+          return res.status(400).json({
+              message: 'Code undefined'
+          });
+      }
+
+      if (email !== session.user.email) {
+          console.error('Code does not match session email:', { code, email, sessionEmail: session.user.email });
+          return res.status(400).json({
+              message: 'Code unavailable'
+          });
+      }
+
+      session.user.isConfirm = true;
+      return res.status(200).json({
+          message: 'Email has been confirmed',
+          session,
       });
-    }
-
-    const email = Confirm.getData(code);
-
-    if (!email) {
-      return res.status(400).json({
-        message: 'code undefined'
-      });
-    }
-
-    if (email !== session.data.email) {
-      return res.status(400).json({
-        message: 'code unavailable'
-      });
-    }
-
-    session.user.isConfirm = true;
-
-    return res.status(200).json({
-      message: 'Email has been confirmed',
-      session,
-    });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+      console.error('Error during confirmation:', error);
+      res.status(400).json({ message: error.message });
   }
 });
 
